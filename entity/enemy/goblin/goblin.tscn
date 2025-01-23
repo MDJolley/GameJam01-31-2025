@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://bax0cf3xxy78y"]
+
+[ext_resource type="Script" path="res://entity/enemy/goblin/goblin.gd" id="1_7dr0r"]
+[ext_resource type="Texture2D" uid="uid://phk2l2tqfb44" path="res://assets/sprites/Goblin.png" id="1_s8bi5"]
+[ext_resource type="PackedScene" uid="uid://ifoqpeia677d" path="res://entity/enemy/goblin/goblin_shield.tscn" id="2_ubqb6"]
+[ext_resource type="PackedScene" uid="uid://cfw246oio3rqy" path="res://entity/enemy/goblin/goblin_sword.tscn" id="3_ro82c"]
+[ext_resource type="PackedScene" uid="uid://clbykao0x2cgg" path="res://entity/health_component.tscn" id="5_hfgm7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j7sse"]
+radius = 28.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w8jgv"]
+radius = 426.005
+
+[node name="Goblin" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 15
+script = ExtResource("1_7dr0r")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+rotation = -1.5708
+texture = ExtResource("1_s8bi5")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_j7sse")
+
+[node name="GoblinShield" parent="." instance=ExtResource("2_ubqb6")]
+position = Vector2(12, 30)
+rotation = -1.94371
+collision_mask = 0
+
+[node name="GoblinSword" parent="." instance=ExtResource("3_ro82c")]
+position = Vector2(39, -9)
+rotation = 1.27646
+
+[node name="HealthComponent" parent="." instance=ExtResource("5_hfgm7")]
+max_hp = 1
+
+[node name="DetectionRadius" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape2D" parent="DetectionRadius"]
+shape = SubResource("CircleShape2D_w8jgv")
+
+[node name="NavigationAgent" type="NavigationAgent2D" parent="."]
+target_desired_distance = 186.0
+avoidance_enabled = true
+
+[connection signal="body_entered" from="DetectionRadius" to="." method="_on_detection_radius_body_entered"]
+[connection signal="body_exited" from="DetectionRadius" to="." method="_on_detection_radius_body_exited"]

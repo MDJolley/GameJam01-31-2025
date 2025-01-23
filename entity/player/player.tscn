@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://syadbypnw0vk"]
+
+[ext_resource type="PackedScene" uid="uid://cesnqypl4c2dl" path="res://entity/player/sword.tscn" id="1_tpwv6"]
+[ext_resource type="PackedScene" uid="uid://dwxfveexg5f8p" path="res://entity/player/hero.tscn" id="2_ynt0u"]
+
+[node name="Player" groups=["player"] instance=ExtResource("1_tpwv6")]
+collision_layer = 2
+
+[node name="PinJoint" type="PinJoint2D" parent="." index="2"]
+position = Vector2(-31, 31)
+node_a = NodePath("..")
+node_b = NodePath("Hero/RArmL")
+
+[node name="Hero" parent="PinJoint" index="0" instance=ExtResource("2_ynt0u")]
+position = Vector2(-47, 2)
+
+[node name="Camera" type="Camera2D" parent="." index="3"]
+
+[editable path="PinJoint/Hero"]

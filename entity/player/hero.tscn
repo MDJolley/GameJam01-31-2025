@@ -1,0 +1,233 @@
+[gd_scene load_steps=10 format=3 uid="uid://dwxfveexg5f8p"]
+
+[ext_resource type="Script" path="res://entity/player/hero.gd" id="1_4jrxe"]
+[ext_resource type="Texture2D" uid="uid://dtgtc3r825lgp" path="res://assets/sprites/Hero-Sheet.png" id="1_b00g7"]
+[ext_resource type="Script" path="res://entity/player/player_weapon.gd" id="2_3njh7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vetrs"]
+radius = 4.92929
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4ujqx"]
+radius = 6.40077
+height = 31.2064
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_60hkv"]
+radius = 3.60129
+height = 21.6077
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fub42"]
+radius = 4.99486
+height = 26.064
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_woqn5"]
+radius = 11.0
+height = 46.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y0sp0"]
+radius = 8.0
+height = 20.0
+
+[node name="Hero" type="Node2D"]
+script = ExtResource("1_4jrxe")
+
+[node name="RLegL" type="RigidBody2D" parent="."]
+collision_layer = 4
+collision_mask = 55
+linear_damp = 3.0
+script = ExtResource("2_3njh7")
+
+[node name="Sprite" type="Sprite2D" parent="RLegL"]
+texture = ExtResource("1_b00g7")
+vframes = 10
+frame = 6
+
+[node name="CollisionShape" type="CollisionShape2D" parent="RLegL"]
+position = Vector2(32, 39)
+rotation = -0.7662
+shape = SubResource("CapsuleShape2D_vetrs")
+
+[node name="Joint" type="PinJoint2D" parent="RLegL"]
+position = Vector2(23, 29)
+node_a = NodePath("../../RLegU")
+node_b = NodePath("..")
+
+[node name="LLegL" type="RigidBody2D" parent="."]
+collision_layer = 4
+collision_mask = 55
+linear_damp = 3.0
+script = ExtResource("2_3njh7")
+
+[node name="Sprite" type="Sprite2D" parent="LLegL"]
+texture = ExtResource("1_b00g7")
+vframes = 10
+frame = 5
+
+[node name="CollisionShape" type="CollisionShape2D" parent="LLegL"]
+position = Vector2(-32, 39)
+rotation = 0.76664
+shape = SubResource("CapsuleShape2D_vetrs")
+
+[node name="Joint" type="PinJoint2D" parent="LLegL"]
+position = Vector2(-23, 29)
+node_a = NodePath("../../LLegU")
+node_b = NodePath("..")
+
+[node name="RLegU" type="RigidBody2D" parent="."]
+collision_layer = 4
+collision_mask = 55
+linear_damp = 3.0
+script = ExtResource("2_3njh7")
+
+[node name="Sprite" type="Sprite2D" parent="RLegU"]
+texture = ExtResource("1_b00g7")
+vframes = 10
+
+[node name="CollisionShape" type="CollisionShape2D" parent="RLegU"]
+position = Vector2(13, 17)
+rotation = -0.647517
+shape = SubResource("CapsuleShape2D_4ujqx")
+
+[node name="Joint" type="PinJoint2D" parent="RLegU"]
+position = Vector2(8, 9)
+node_a = NodePath("../../Torso")
+node_b = NodePath("..")
+
+[node name="LLegU" type="RigidBody2D" parent="."]
+collision_layer = 4
+collision_mask = 55
+linear_damp = 3.0
+script = ExtResource("2_3njh7")
+
+[node name="Sprite" type="Sprite2D" parent="LLegU"]
+texture = ExtResource("1_b00g7")
+vframes = 10
+frame = 1
+
+[node name="CollisionShape" type="CollisionShape2D" parent="LLegU"]
+position = Vector2(-13, 17)
+rotation = 0.64765
+shape = SubResource("CapsuleShape2D_4ujqx")
+
+[node name="Joint" type="PinJoint2D" parent="LLegU"]
+position = Vector2(-8, 9)
+node_a = NodePath("../../Torso")
+node_b = NodePath("..")
+
+[node name="RArmL" type="RigidBody2D" parent="."]
+collision_layer = 4
+collision_mask = 55
+linear_damp = 3.0
+script = ExtResource("2_3njh7")
+
+[node name="Sprite" type="Sprite2D" parent="RArmL"]
+texture = ExtResource("1_b00g7")
+vframes = 10
+frame = 3
+
+[node name="CollisionShape" type="CollisionShape2D" parent="RArmL"]
+position = Vector2(40, -7)
+rotation = -0.933751
+shape = SubResource("CapsuleShape2D_60hkv")
+
+[node name="Joint" type="PinJoint2D" parent="RArmL"]
+position = Vector2(32, -12)
+node_a = NodePath("../../RArmU")
+node_b = NodePath("..")
+
+[node name="LArmL" type="RigidBody2D" parent="."]
+collision_layer = 4
+collision_mask = 55
+linear_damp = 3.0
+script = ExtResource("2_3njh7")
+
+[node name="Sprite" type="Sprite2D" parent="LArmL"]
+texture = ExtResource("1_b00g7")
+vframes = 10
+frame = 4
+
+[node name="CollisionShape" type="CollisionShape2D" parent="LArmL"]
+position = Vector2(-40, -7)
+rotation = 0.934143
+shape = SubResource("CapsuleShape2D_60hkv")
+
+[node name="Joint" type="PinJoint2D" parent="LArmL"]
+position = Vector2(-32, -12)
+node_a = NodePath("../../LArmU")
+node_b = NodePath("..")
+
+[node name="RArmU" type="RigidBody2D" parent="."]
+collision_layer = 4
+collision_mask = 55
+linear_damp = 3.0
+script = ExtResource("2_3njh7")
+
+[node name="Sprite" type="Sprite2D" parent="RArmU"]
+texture = ExtResource("1_b00g7")
+vframes = 10
+frame = 9
+
+[node name="CollisionShape" type="CollisionShape2D" parent="RArmU"]
+position = Vector2(22, -18)
+rotation = -0.972148
+shape = SubResource("CapsuleShape2D_fub42")
+
+[node name="Joint" type="PinJoint2D" parent="RArmU"]
+position = Vector2(14, -24)
+node_a = NodePath("../../Torso")
+node_b = NodePath("..")
+
+[node name="LArmU" type="RigidBody2D" parent="."]
+collision_layer = 4
+collision_mask = 55
+linear_damp = 3.0
+script = ExtResource("2_3njh7")
+
+[node name="Sprite" type="Sprite2D" parent="LArmU"]
+texture = ExtResource("1_b00g7")
+vframes = 10
+frame = 8
+
+[node name="CollisionShape" type="CollisionShape2D" parent="LArmU"]
+position = Vector2(-22, -18)
+rotation = 0.972661
+shape = SubResource("CapsuleShape2D_fub42")
+
+[node name="Joint" type="PinJoint2D" parent="LArmU"]
+position = Vector2(-14, -24)
+node_a = NodePath("../../Torso")
+node_b = NodePath("..")
+
+[node name="Torso" type="RigidBody2D" parent="."]
+collision_layer = 4
+collision_mask = 55
+linear_damp = 3.0
+script = ExtResource("2_3njh7")
+
+[node name="Sprite" type="Sprite2D" parent="Torso"]
+texture = ExtResource("1_b00g7")
+vframes = 10
+frame = 2
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Torso"]
+position = Vector2(0, -9)
+shape = SubResource("CapsuleShape2D_woqn5")
+
+[node name="Head" type="RigidBody2D" parent="."]
+collision_layer = 4
+collision_mask = 55
+linear_damp = 3.0
+script = ExtResource("2_3njh7")
+
+[node name="Sprite" type="Sprite2D" parent="Head"]
+texture = ExtResource("1_b00g7")
+vframes = 10
+frame = 7
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Head"]
+position = Vector2(0, -43)
+shape = SubResource("CapsuleShape2D_y0sp0")
+
+[node name="Joint" type="PinJoint2D" parent="Head"]
+position = Vector2(0, -34)
+node_a = NodePath("../../Torso")
+node_b = NodePath("..")

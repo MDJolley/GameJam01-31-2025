@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://ifoqpeia677d"]
+
+[ext_resource type="Texture2D" uid="uid://bctab6cwgm3of" path="res://assets/sprites/Goblin_Shield.png" id="1_b8ua2"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kq7dm"]
+radius = 9.0
+height = 64.0
+
+[node name="GoblinShield" type="CharacterBody2D"]
+collision_layer = 32
+collision_mask = 6
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_b8ua2")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
+shape = SubResource("CapsuleShape2D_kq7dm")

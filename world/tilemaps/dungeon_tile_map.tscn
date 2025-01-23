@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cet4q6bn1d562"]
+
+[ext_resource type="TileSet" uid="uid://b3u5bdqbrlge7" path="res://world/tilemaps/dungeon_tile_set.tres" id="1_dselc"]
+
+[node name="DungeonTileMap" type="TileMapLayer"]
+z_index = -10
+scale = Vector2(2, 2)
+tile_set = ExtResource("1_dselc")
