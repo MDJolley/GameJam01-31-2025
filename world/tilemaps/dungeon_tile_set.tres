@@ -3,11 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bqhqsef3vcj8c" path="res://assets/sprites/Floor_Tile.png" id="1_1my7o"]
 [ext_resource type="Texture2D" uid="uid://cqpdxjgvpy7nq" path="res://assets/sprites/Wall_Tiles.png" id="2_2f47x"]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_ijx73"]
-vertices = PackedVector2Array(16, 16, -16, 16, -16, -16, 16, -16)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)])
-agent_radius = 0.0
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_3tvh8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fa7kk"]
 texture = ExtResource("1_1my7o")
@@ -15,7 +11,7 @@ texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/terrain_set = 0
 0:0/0/terrain = 0
-0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_ijx73")
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_3tvh8")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jahpa"]
 texture = ExtResource("2_2f47x")

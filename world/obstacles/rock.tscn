@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://b5wae6ac36jd3" path="res://assets/sprites/Rock.png" id="1_l2wn1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d3fqm"]
-radius = 34.0147
+radius = 33.0
 
 [node name="Rock" type="StaticBody2D"]
 
@@ -14,7 +14,7 @@ shape = SubResource("CircleShape2D_d3fqm")
 texture = ExtResource("1_l2wn1")
 
 [node name="NavigationObstacle" type="NavigationObstacle2D" parent="."]
-radius = 90.67
-vertices = PackedVector2Array(-32, -32, 0, -40, 32, -32, 40, 0, 32, 32, 0, 40, -32, 32, -40, 0)
+scale = Vector2(-0.169235, 0.505835)
+radius = 68.0
 affect_navigation_mesh = true
 carve_navigation_mesh = true

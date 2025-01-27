@@ -45,7 +45,6 @@ shape = SubResource("CircleShape2D_w8jgv")
 
 [node name="NavigationAgent" type="NavigationAgent2D" parent="."]
 target_desired_distance = 186.0
-path_postprocessing = 1
 avoidance_enabled = true
 debug_enabled = true
 
