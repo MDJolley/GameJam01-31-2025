@@ -2,14 +2,20 @@ extends CharacterBody2D
 
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var nav : NavigationAgent2D = $NavigationAgent
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var attack_cooldown: Timer = $AttackCooldown
 
 @export var speed : float = 1
 @export var acceleration : float = .3
 
-
 var player : Sword
 var agro : bool = false
 var roam : bool = false
+var currently_attacking : bool = false
+var attack_off_cd : bool = true
+var attack_range : float = 200
+var attack_target : Vector2
+var lunge_speed : float = 80
 var roam_countdown = 2
 var roam_direction
 
@@ -25,13 +31,34 @@ func _physics_process(delta: float) -> void:
 		var damage = collider.get_meta("attack")
 		if damage != null:
 			health_component.modify_hp(-damage)
-	if agro:
-		look_at(player.global_position)
+	#if attack:
+		#if !currently_attacking:
+			#velocity = Vector2.ZERO
+			#currently_attacking = true
+			#attack_target = nav.target_position - position
+			#animation_player.play("attack")
+			#await animation_player.animation_finished
+			#currently_attacking = false
+	if currently_attacking:
+		velocity = Vector2.ZERO
+	elif agro:
+		if !attack_target == Vector2.ZERO:
+			look_at(global_position + attack_target)
+		else:
+			look_at(player.global_position)
 		var direction = (_chase_player() - global_position).normalized()
 		velocity = velocity.lerp(direction * speed, acceleration)
+		if nav.distance_to_target() < attack_range && attack_off_cd:
+			attack_off_cd = false
+			velocity = Vector2.ZERO
+			currently_attacking = true
+			attack_target = player.position - position
+			animation_player.play("attack")
+			await animation_player.animation_finished
+			currently_attacking = false
 	elif roam:
 		var direction = roam_direction.normalized()
-		look_at(Vector2(direction.x * 1000, direction.y * 1000))
+		look_at(direction*1000)
 		velocity = velocity.lerp(direction * speed, acceleration)
 	else:
 		velocity = velocity.lerp(Vector2(0,0), acceleration)
@@ -76,6 +103,16 @@ func _roam():
 	roam = !roam
 	roam_countdown = randi_range(1, 3)
 
-
 func _on_goblin_sword_take_thorns_damage(damage) -> void:
 	health_component.modify_hp(-damage)
+
+#Attack functions
+func _lunge() -> void:
+	velocity = attack_target.normalized() * lunge_speed
+	await get_tree().create_timer(.2).timeout
+	velocity = Vector2.ZERO
+	attack_target = Vector2.ZERO
+	attack_cooldown.start()
+
+func _on_attack_cooldown_reset() -> void:
+	attack_off_cd = true
