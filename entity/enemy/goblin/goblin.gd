@@ -28,11 +28,9 @@ func _physics_process(delta: float) -> void:
 	if agro:
 		look_at(player.global_position)
 		var direction = (_chase_player() - global_position).normalized()
-		print("player direction: ", direction)
 		velocity = velocity.lerp(direction * speed, acceleration)
 	elif roam:
 		var direction = roam_direction.normalized()
-		print("roam direction: ", direction)
 		look_at(Vector2(direction.x * 1000, direction.y * 1000))
 		velocity = velocity.lerp(direction * speed, acceleration)
 	else:
