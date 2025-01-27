@@ -9,6 +9,9 @@ extends CharacterBody2D
 
 var player : Sword
 var agro : bool = false
+var roam : bool = false
+var roam_countdown = 2
+var roam_direction
 
 func _ready() -> void:
 	var health_comp : HealthComponent = find_child("HealthComponent")
@@ -25,9 +28,20 @@ func _physics_process(delta: float) -> void:
 	if agro:
 		look_at(player.global_position)
 		var direction = (_chase_player() - global_position).normalized()
+		print("player direction: ", direction)
+		velocity = velocity.lerp(direction * speed, acceleration)
+	elif roam:
+		var direction = roam_direction.normalized()
+		print("roam direction: ", direction)
+		look_at(Vector2(direction.x * 1000, direction.y * 1000))
 		velocity = velocity.lerp(direction * speed, acceleration)
 	else:
 		velocity = velocity.lerp(Vector2(0,0), acceleration)
+	
+	if !agro:
+		roam_countdown -= delta
+		if roam_countdown <= 0:
+			_roam()
 	
 	move_and_slide()
 
@@ -42,7 +56,10 @@ func _on_detection_radius_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		print("player found")
 		player = body
+		roam = false
 		agro = true
+		roam_countdown = 2
+		roam_direction = Vector2.ZERO
 
 func _on_detection_radius_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
@@ -53,3 +70,10 @@ func _chase_player() -> Vector2:
 	var pos_goal = player.global_position
 	nav.target_position = pos_goal
 	return nav.get_next_path_position()
+	
+func _roam():
+	var x_distance = randf_range(-1, 1)
+	var y_distance = randf_range(-1, 1)
+	roam_direction = Vector2(x_distance, y_distance)
+	roam = !roam
+	roam_countdown = randi_range(1, 3)
