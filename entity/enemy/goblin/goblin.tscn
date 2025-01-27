@@ -47,5 +47,6 @@ shape = SubResource("CircleShape2D_w8jgv")
 target_desired_distance = 186.0
 avoidance_enabled = true
 
+[connection signal="take_thorns_damage" from="GoblinSword" to="." method="_on_goblin_sword_take_thorns_damage"]
 [connection signal="body_entered" from="DetectionRadius" to="." method="_on_detection_radius_body_entered"]
 [connection signal="body_exited" from="DetectionRadius" to="." method="_on_detection_radius_body_exited"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://dwxfveexg5f8p"]
 
 [ext_resource type="Script" path="res://entity/player/hero.gd" id="1_4jrxe"]
-[ext_resource type="Texture2D" uid="uid://dtgtc3r825lgp" path="res://assets/sprites/Hero-Sheet.png" id="1_b00g7"]
+[ext_resource type="Texture2D" uid="uid://cs3brkyk7cjwt" path="res://assets/sprites/Hero_Sheet.png" id="1_b00g7"]
 [ext_resource type="Script" path="res://entity/player/player_weapon.gd" id="2_3njh7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vetrs"]

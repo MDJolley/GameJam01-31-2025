@@ -22,7 +22,7 @@ func _physics_process(delta: float) -> void:
 	var collision = move_and_collide(velocity)
 	if collision:
 		var collider = collision.get_collider()
-		var damage = collider.get_meta("damage")
+		var damage = collider.get_meta("attack")
 		if damage != null:
 			health_component.modify_hp(-damage)
 	if agro:
@@ -75,3 +75,7 @@ func _roam():
 	roam_direction = Vector2(x_distance, y_distance)
 	roam = !roam
 	roam_countdown = randi_range(1, 3)
+
+
+func _on_goblin_sword_take_thorns_damage(damage) -> void:
+	health_component.modify_hp(-damage)

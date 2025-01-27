@@ -1,14 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://cfw246oio3rqy"]
+[gd_scene load_steps=4 format=3 uid="uid://cfw246oio3rqy"]
 
 [ext_resource type="Texture2D" uid="uid://cxbnc2fquwtai" path="res://assets/sprites/Goblin_Sword.png" id="1_4vtne"]
+[ext_resource type="Script" path="res://entity/enemy/goblin/goblin_sword.gd" id="1_kickq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s77da"]
 radius = 2.89274
 height = 36.7653
 
-[node name="GoblinSword" type="AnimatableBody2D"]
+[node name="GoblinSword" type="CharacterBody2D"]
 collision_layer = 16
-collision_mask = 0
+collision_mask = 4
+script = ExtResource("1_kickq")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_4vtne")

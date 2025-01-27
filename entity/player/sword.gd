@@ -1,6 +1,7 @@
 extends CharacterBody2D
 class_name Sword
 
+@export var attack : float = 1
 @export var move_speed : float = 300
 @export var move_acceleration : float = .3
 @export var rotate_speed : float = 3
@@ -8,6 +9,9 @@ class_name Sword
 
 var rotation_velocity : float = 0
 var rotate_direction : float = 1
+
+func _ready() -> void:
+	self.set_meta("attack", attack)
 
 func _physics_process(delta: float) -> void:
 	_handle_movement()
