@@ -1,0 +1,98 @@
+[gd_scene load_steps=9 format=3 uid="uid://ccj1yg5jtay0"]
+
+[ext_resource type="Texture2D" uid="uid://phk2l2tqfb44" path="res://assets/sprites/Goblin.png" id="1_joso3"]
+[ext_resource type="PackedScene" uid="uid://clbykao0x2cgg" path="res://entity/health_component.tscn" id="2_trbie"]
+[ext_resource type="PackedScene" uid="uid://duwf5vg0ktift" path="res://entity/enemy/goblin_ranger/goblin_crossbow.tscn" id="3_rocgo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w4mi4"]
+radius = 28.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mq47k"]
+radius = 426.005
+
+[sub_resource type="Animation" id="Animation_c2xqf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_4njva"]
+resource_name = "attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.633333, 0.7, 0.766667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(100, 100, 100, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_lunge"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3sp8c"]
+_data = {
+"RESET": SubResource("Animation_c2xqf"),
+"attack": SubResource("Animation_4njva")
+}
+
+[node name="GoblinRanger" type="CharacterBody2D"]
+
+[node name="Sprite" type="Sprite2D" parent="."]
+rotation = -1.5708
+texture = ExtResource("1_joso3")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_w4mi4")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_trbie")]
+max_hp = 1
+
+[node name="DetectionRadius" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape2D" parent="DetectionRadius"]
+shape = SubResource("CircleShape2D_mq47k")
+
+[node name="NavigationAgent" type="NavigationAgent2D" parent="."]
+target_desired_distance = 186.0
+avoidance_enabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3sp8c")
+}
+
+[node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="GoblinCrossbow" parent="." instance=ExtResource("3_rocgo")]
+position = Vector2(20, -16)

@@ -1,0 +1,82 @@
+[gd_scene load_steps=6 format=3 uid="uid://duwf5vg0ktift"]
+
+[ext_resource type="Texture2D" uid="uid://b4e1lhp8s1hh" path="res://assets/sprites/Goblin_Crossbow_Sheet.png" id="1_ey6gn"]
+
+[sub_resource type="Animation" id="Animation_oae8w"]
+resource_name = "fire"
+
+[sub_resource type="Animation" id="Animation_ad28a"]
+resource_name = "load"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333, 0.666667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.91986, 0.785398]
+}
+
+[sub_resource type="Animation" id="Animation_0duau"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.91986]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aj463"]
+_data = {
+"RESET": SubResource("Animation_0duau"),
+"fire": SubResource("Animation_oae8w"),
+"load": SubResource("Animation_ad28a")
+}
+
+[node name="GoblinCrossbow" type="Node2D"]
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(-0.117702, 0.0254383)
+rotation = 1.91986
+texture = ExtResource("1_ey6gn")
+offset = Vector2(9.73537, -9.76029)
+hframes = 4
+metadata/_edit_group_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_aj463")
+}

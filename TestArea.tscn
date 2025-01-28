@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://syadbypnw0vk" path="res://entity/player/player.tscn" id="3_f1l32"]
 [ext_resource type="PackedScene" uid="uid://cet4q6bn1d562" path="res://world/tilemaps/dungeon_tile_map.tscn" id="3_mnr5y"]
-[ext_resource type="PackedScene" uid="uid://bax0cf3xxy78y" path="res://entity/enemy/goblin/goblin.tscn" id="4_534h1"]
+[ext_resource type="PackedScene" uid="uid://bax0cf3xxy78y" path="res://entity/enemy/goblin_knight/goblin_knight.tscn" id="4_534h1"]
 
 [node name="Testing" type="Node2D"]
 
